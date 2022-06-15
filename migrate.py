@@ -48,7 +48,7 @@
 # SELECT SETVAL('public.staff_staff_id_seq', COALESCE(MAX(staff_id), 1) ) FROM public.staff;
 # SELECT SETVAL('public.store_store_id_seq', COALESCE(MAX(store_id), 1) ) FROM public.store;
 #
-#
+# *************************************************************************************************
 CONST_INPUT_FILE_NAME = "sakila-dump.sql"
 CONST_OUTPUT_FILE_NAME = "sakila-converted-to-postgres.sql"
 
@@ -57,9 +57,9 @@ CONST_PRIMARY_KEY = "PRIMARY KEY("                  # Need to get the primary ke
 CONST_FOREIGN_KEY = "FOREIGN KEY"                   # All foreign keys are buffered to fk_buffer until all CREATE TABLE declarations are done and all INSERTs are done.
                                                     # Then a sequence of ALTER TABLE <table name> ADD CONSTRAINT ..... are added.
 CONST_CREATE_TABLE = "CREATE TABLE"                 # CREATE TABLE statement, used to buffer all successive lines until we hit ); and we can start modifying syntax.
-CONST_CREATE_TRIGGER_START = "CREATE TRIGGER"       # A Trigger declaration has been found. It's ignored as it's not required by the AWS re/Start Assginment 20022.
+CONST_CREATE_TRIGGER_START = "CREATE TRIGGER"       # A Trigger declaration has been found. It's ignored as it's not required by the AWS re/Start Assginment 2022.
 CONST_CREATE_TRIGGER_END = "END;\n"                 #
-CONST_CREATE_VIEW_START = "CREATE VIEW"             # A View declaration has been found. It's ignored as it's not required by the AWS re/Start Assginment 20022.
+CONST_CREATE_VIEW_START = "CREATE VIEW"             # A View declaration has been found. It's ignored as it's not required by the AWS re/Start Assginment 2022.
 CONST_CREATE_VIEW_END = ";\n"                       #
 CONST_BOOL_TRUE = "TRUE"                            # Boolean value changes to 1 (INTEGER).
 CONST_BOOL_FALSE = "FALSE"                          # Boolean value changes to 0 (INTEGER).
@@ -233,7 +233,7 @@ with open(CONST_INPUT_FILE_NAME, "r") as sqlite_f:
                             break
                         idx -= 1
                     
-                    # Now we write the modified buffer out to the file sqlite-converted-to-postgres.sql file
+                    # Now we write the modified buffer out to the file sqlite-converted-to-postgres.sql
                     #
                     for a_line in buffer:
                         if (a_line != ""): postgres_f.write(a_line)
